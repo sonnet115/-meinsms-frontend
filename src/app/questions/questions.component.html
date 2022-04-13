@@ -1,0 +1,112 @@
+<ngx-spinner fullScreen="false">
+  <p style="font-size: 20px; color: white">{{'please_wait' | translate}} ...</p>
+</ngx-spinner>
+<div class="container-fluid">
+  <h2>Create Question</h2>
+  <form class="form-horizontal" style="max-width: 600px" [formGroup]="questionForm" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label class="control-label col-sm-10">Question Text</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="question_text" placeholder="Question Text"
+               name="question_text" [ngClass]="{ 'is-invalid': submitted && fields.question_text.errors }">
+        <div *ngIf="submitted && fields.question_text.errors" class="invalid-feedback">
+          <div *ngIf="fields.question_text.errors.required">Question Text is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-10">
+        <b>Select Question Set</b>
+        <select class="form-control" name="queSetID" formControlName="queSetID" [ngClass]="{ 'is-invalid': submitted && fields.queSetID.errors }">
+          <option *ngFor="let qs of questionSets" value="{{qs.id}}">{{qs.name}}</option>
+        </select>
+        <div *ngIf="submitted && fields.queSetID.errors" class="invalid-feedback">
+          <div *ngIf="fields.queSetID.errors.required">Question Set is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-10">
+        <label class="radio-inline" style="margin-right: 20px">
+          <input value="multiple" type="radio" formControlName="qType" name="qType"
+                 (change)="questionTypeChanged($event)"> Multiple Choice
+        </label>
+        <label class="radio-inline" style="margin-right: 20px">
+          <input value="YN" type="radio" formControlName="qType" name="qType"
+                 (change)="questionTypeChanged($event)"> Yes/No
+        </label>
+
+        <label class="radio-inline">
+          <input value="boolean" type="radio" formControlName="qType" name="qType"
+                 (change)="questionTypeChanged($event)"> True/False
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12">
+      <ng-container formArrayName="qOptions" *ngIf="showMultipleOptions">
+        <div *ngFor="let qOption of qOptions.controls; let index = index" [formGroupName]="index" class="row"
+             style="margin-bottom: 15px">
+          <div class="col-sm-1">
+            <div class="checkbox" style="position: relative;top:8px">
+              <label><input type="checkbox" formControlName="optionLabel" value="a"> {{optionLabelArray[index]}}</label>
+            </div>
+          </div>
+
+          <div class="col-sm-9">
+            <input class="form-control" placeholder="Enter Option" formControlName="optionText" name="optionText" required="required">
+          </div>
+
+          <div class="col-sm-2">
+            <button (click)="removeQuantity(index)" class="btn btn-danger" style="cursor: pointer"><i
+              class="fa fa-trash-alt"></i></button>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-sm-5">
+            <a href="javascript:void(0)" class="btn btn-sm btn-outline-success" (click)="addOption()"
+               style="position: relative;top: 3px;cursor: pointer"><i
+              class="fa fa-plus-square"></i> Add Option
+            </a>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="form-group" *ngIf="showBooleanOptions">
+      <div class="col-sm-10">
+        <b>Select Answer: </b>
+        <label class="radio-inline" style="margin-right: 20px">
+          <input value="TRUE" type="radio" formControlName="booleanAns" name="booleanAns"> True
+        </label>
+        <label class="radio-inline">
+          <input value="FALSE" type="radio" formControlName="booleanAns" name="booleanAns"> False
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="showYNOptions">
+      <div class="col-sm-10">
+        <b>Select Answer: </b>
+        <label class="radio-inline" style="margin-right: 20px">
+          <input value="YES" type="radio" formControlName="YNAns" name="YNAns"> Yes
+        </label>
+        <label class="radio-inline">
+          <input value="NO" type="radio" formControlName="YNAns" name="YNAns"> No
+        </label>
+      </div>
+    </div>
+
+
+    <hr>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-outline-primary">Create Question</button>
+      </div>
+    </div>
+  </form>
+  <alert fade="true"></alert>
+</div>

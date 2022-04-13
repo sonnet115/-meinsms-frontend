@@ -1,0 +1,132 @@
+<ngx-spinner fullScreen="false">
+  <p style="font-size: 20px; color: white">{{'processing' | translate}}</p>
+</ngx-spinner>
+
+<div class="row">
+  <div class="col-sm-3 m-t-20" *ngFor="let questionSet of questionSets">
+    <div class="bg-info shadow c_border_radius c_box_items card-body">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3 class="font-weight-bold text-white">{{questionSet.name}}</h3>
+          <h5 class="text-dark">Total Questions: </h5>
+          <a href="javascript:void(0)" (click)="gotQList(questionSet.id)" class="text-white"
+             style="font-size: 25px; cursor: pointer;text-decoration: underline">{{ questionSet.questions.length }}</a>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: -20px;">
+        <div class="col-sm-6 ">
+          <p class=" font-weight-bold text-white"
+             (click)="confirmDelete(confirmModal, questionSet.name,questionSet.id)"><i
+            class="fa fa-trash"></i></p>
+        </div>
+        <div class="col-sm-6 ">
+          <p class="font-weight-bold text-white" style="text-align: right"
+             (click)="editQuestionSet(questionSet.id, updateContent);open(updateContent)"><i class="fa fa-edit"></i></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Create Question Set Button-->
+<div class="row">
+  <div class="col-sm-3 m-t-20" (click)="open(content)" style="cursor: pointer">
+    <div class="bg-danger shadow c_border_radius c_box_items card-body">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h4 class="font-weight-bold text-white ">Create</h4>
+          <h2 class="font-weight-bold text-white icon-Add"></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Create Question Set Button-->
+
+<!--Create Question Set Modal-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Question Set</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal m-t-20" [formGroup]="questionSetData" (ngSubmit)="saveQuestionSet()">
+      <div class="mb-3">
+        <div class="input-group">
+          <input type="text" formControlName="name" class="form-control form-control-lg" name="name"
+                 placeholder="Question Set Name"
+                 [ngClass]="{ 'is-invalid': submitted && fields.name.errors }">
+          <div *ngIf="submitted && fields.name.errors" class="invalid-feedback">
+            <div *ngIf="fields.name.errors.required">Name is required</div>
+          </div>
+        </div>
+        <br>
+        <alert fade="true"></alert>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-success">Create</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!--Create Question Set Modal-->
+
+<!--Update Question Set Modal-->
+<ng-template #updateContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-edit-content">Update Question Set</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <form class="form-horizontal m-t-20" [formGroup]="questionSetDataUpdate"
+            (ngSubmit)="updateQuestionSet(questionSetsById.id)">
+        <div class="mb-3">
+          <div class="input-group">
+            <input formControlName="name" class="form-control form-control-lg" name="name"
+                   placeholder="Question Set Name"
+                   [ngModel]="questionSetsById.name" [ngClass]="{ 'is-invalid': submitted && fields.name.errors }">
+            <div *ngIf="submitted && fields.name.errors" class="invalid-feedback">
+              <div *ngIf="fields.name.errors.required">Name is required</div>
+            </div>
+          </div>
+          <br>
+          <alert fade="true"></alert>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-danger ">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+<!--Update Question Set Modal-->
+
+<!-- Delete Question Set Modal-->
+<ng-template #confirmModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <h5>
+        Are you sure you want to delete "<span class="text-primary">{{questionSetName}}</span>" Question Set?
+      </h5>
+
+      <p class="text-muted">All question associated to this question set will be permanently deleted.
+        <span class="text-danger"> This operation can not be undone.</span>
+      </p>
+    </div>
+    <br>
+    <alert fade="true"></alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cancel Clicked')">Cancel</button>
+    <button type="button" class="btn btn-outline-danger" (click)="deleteQuestionSet(questionSetId)">Delete</button>
+  </div>
+</ng-template>
+<!-- Delete Question Set Modal-->
+
+

@@ -1,0 +1,56 @@
+<ngx-spinner fullScreen="false">
+  <p style="font-size: 20px; color: white">{{'please_wait' | translate}} ...</p>
+</ngx-spinner>
+<div>
+  <div >
+    <table class="table table-hover table-bordered">
+      <thead class="text-center bg-info text-white">
+      <tr>
+        <th>Question Text</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Answer</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let q of questions; let id = index">
+        <td>{{q.questionText}}</td>
+        <td class="text-center">{{q.type | uppercase}}</td>
+
+        <td>
+          <div *ngFor="let qop of q.questionOptions">
+        <span *ngIf="q.type==='multiple'" class="text-white badge badge-pill badge-sm  bg-primary"
+              style="margin-right: 5px">{{qop.optionValue}}</span>
+            <span class="text-muted">{{qop.optionName}}</span>
+          </div>
+        </td>
+
+        <td class="text-center">
+          <div *ngFor="let qans of q.questionAnswers">
+            <span class="text-white badge badge-pill badge-sm  bg-success">{{qans.answer}}</span>
+          </div>
+        </td>
+
+        <td class="text-center">
+          <span style="font-size: 15px;cursor: pointer" (click)="updateQ(q.id)"><i class="fa fa-edit"></i></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <!--    <p>Showing {{pageNumber + limit}} to {{(pageNumber + 1) * limit}} of {{totalRecords}}</p>-->
+  </div>
+  <div>
+    <ul class="pagination justify-content-end">
+      <li *ngFor="let _ of [].constructor(totalPage);let i=index" class="page-item">
+        <a class="page-link bg-danger text-white" *ngIf="pageNumber === i" href="javascript:void(0);"
+           (click)="gotoPage(limit, i)">{{i + 1}}</a>
+        <a class="page-link" *ngIf="pageNumber !== i" href="javascript:void(0);"
+           (click)="gotoPage(limit, i)">{{i + 1}}</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
