@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public translate: TranslateService) {
+    translate.addLangs(['us', 'fr']);
+    translate.setDefaultLang('us');
+
+    if (localStorage.getItem('selected_lang') == null) {
+      localStorage.setItem('selected_lang', 'us');
+    }
+  }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -1,0 +1,40 @@
+<ngx-spinner fullScreen="false">
+  <p style="font-size: 20px; color: white">{{'please_wait' | translate}} ...</p>
+</ngx-spinner>
+
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center">
+  <div class="auth-box" style="max-width: 500px !important;">
+    <alert></alert>
+    <div id="recoverform" class="d-block">
+      <div class="logo">
+        <span class="db"><img src="../../../../../assets/images/logo.png" style="max-width: 40%" alt="logo"/></span>
+        <h2 class="font-medium m-b-20">{{'update' | translate}} {{'password' | translate}}</h2>
+      </div>
+      <div class="row m-t-20">
+        <!-- Form -->
+        <form class="col-12">
+          <!-- email -->
+          <div class="form-group row">
+            <div class="col-12">
+              <input class="form-control form-control-lg" type="password" required=""
+                     placeholder="{{'new_password' | translate}}" #new_pass>
+              <br>
+              <input class="form-control form-control-lg" type="password" required=""
+                     placeholder="{{'confirm_password' | translate}}" #confirm_pass>
+            </div>
+          </div>
+          <!-- pwd -->
+          <div class="row m-t-20">
+            <div class="col-12">
+
+            </div>
+            <br>
+            <div class="col-sm-12 text-center m-t-40">
+              <a href="/#/authentication/login" class="text-info m-l-5 "><b>{{'go_back_login' | translate}}</b></a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

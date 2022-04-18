@@ -1,8 +1,8 @@
 import {Component, AfterViewInit, EventEmitter, Output, OnInit} from '@angular/core';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {Router} from '@angular/router';
-import {CommonService} from '../common.service';
-import { LoggerService } from 'src/app/shared/logger.service';
+import {ApiService} from '../services/api.service';
+import { LoggerService } from 'src/app/shared/services/logger.service';
 
 declare var $: any;
 
@@ -20,7 +20,7 @@ export class NavigationComponent implements OnInit {
   public available_balance: any;
 
   constructor(private router: Router,
-              public commonService: CommonService,
+              public commonService: ApiService,
               private loggerService: LoggerService) {
     if (localStorage.getItem('selected_lang') != null) {
       this.selected_lang = localStorage.getItem('selected_lang');
@@ -37,17 +37,6 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAvailableBalance();
-  }
-
-  public getAvailableBalance(): void {
-    this.commonService.availableBalance().subscribe((response: any) => {
-        this.commonService.available_balance = response.toFixed(2);
-        this.available_balance = this.commonService.available_balance;
-      },
-      error => {
-        this.loggerService.log('error', error);
-      });
   }
 
   logout() {
