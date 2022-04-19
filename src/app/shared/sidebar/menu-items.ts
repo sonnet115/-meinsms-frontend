@@ -1,18 +1,11 @@
 import {RouteInfo} from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
+
   {
-    path: '',
-    title: 'Menus',
-    icon: 'icon-Bird',
-    class: 'nav-small-cap',
-    extralink: true,
-    submenu: []
-  },
-  {
-    path: '/manage-question-sets',
-    title: 'Manage Question Set',
-    icon: 'icon-Files',
+    path: '/manage-classes',
+    title: 'manage_classes',
+    icon: 'icon-Bell-2',
     class: '',
     extralink: false,
     submenu: []

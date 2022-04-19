@@ -14,6 +14,7 @@ export class DialogModalComponent {
   @Input() iconClass;
 
   constructor(private activeModal: NgbActiveModal) {
+    activeModal.close();
   }
 
   close() {

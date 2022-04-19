@@ -14,6 +14,30 @@ export class ApiService {
               private endpoints: Endpoints) {
   }
 
+  public post(body, url) {
+    return this.http.post(url, body).pipe(
+      catchError(this.handleError),
+    );
+  }
+
+  public put(body, url) {
+    return this.http.put(url, body).pipe(
+      catchError(this.handleError),
+    );
+  }
+
+  public get(param, url) {
+    return this.http.get(url + param).pipe(
+      catchError(this.handleError),
+    );
+  }
+
+  public delete(param, url) {
+    return this.http.delete(url + param).pipe(
+      catchError(this.handleError),
+    );
+  }
+
   private handleError(error: HttpErrorResponse): any {
     return throwError(error);
   }

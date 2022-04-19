@@ -8,6 +8,7 @@ import {LoggerService} from 'src/app/shared/services/logger.service';
 import {ApiService} from '../../../../shared/services/api.service';
 import {DialogService} from '../../../../shared/services/_modal/dialog.service';
 import {environment} from '../../../../../environments/environment';
+import {Endpoints} from '../../../../shared/endpoints';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   returnUrl: string;
 
-  constructor(private getData: ApiService,
+  constructor(private apiManagerService: ApiService,
               private formBuilder: FormBuilder,
               private spinner: NgxSpinnerService,
               private alertService: AlertService,
@@ -34,18 +35,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
               private route: ActivatedRoute,
               public translate: TranslateService,
               private loggerService: LoggerService,
-              private dialogService: DialogService) {
-    translate.addLangs(['us', 'fr']);
+              private dialogService: DialogService,
+              private endpoints: Endpoints) {
+    translate.addLangs(['us', 'de']);
     translate.setDefaultLang(localStorage.getItem('selected_lang'));
   }
 
   ngOnInit() {
-    this.dialogService.open('Sample Information Message', 'message_type_info', 'primary', environment.info);
     this.loginData = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'manage-question-sets';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'manage-classes';
   }
 
   get fields() {
@@ -81,29 +82,25 @@ export class LoginComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    /*this.getData.checkCredentials(this.loginData.value).subscribe((response: any) => {
-        if (response.code === '403') {
-          this.spinner.hide();
-          this.alertService.error('err_not_active', {autoClose: true});
-        } else {
-          this.spinner.hide();
-          this.loggerService.log('response', response);
-          localStorage.setItem('user_token', response.accessToken);
-          localStorage.setItem('user_id', response.id);
-          localStorage.setItem('user_name', response.username);
-          localStorage.setItem('user_username', response.username);
-          this.router.navigate([this.returnUrl]);
-        }
+    this.apiManagerService.post(this.loginData.value, this.endpoints.login).subscribe((response: any) => {
+        this.spinner.hide();
+        const data = response.data;
+        this.loggerService.log('response', data);
+        localStorage.setItem('user_token', data.token);
+        localStorage.setItem('user_id', data.id);
+        localStorage.setItem('user_name', data.name);
+        localStorage.setItem('user_username', data.username);
+        this.router.navigate([this.returnUrl]);
       },
       error => {
         this.spinner.hide();
         this.loggerService.log('error', error.status);
         if (error.status === 401) {
-          this.alertService.error('err_invalid_cred', {autoClose: true});
+          this.dialogService.open('err_invalid_cred', environment.error_message, 'danger', environment.error);
         } else {
-          this.alertService.error('err_common', {autoClose: true});
+          this.dialogService.open('err_invalid_cred', environment.error_message, 'danger', environment.error);
         }
-      });*/
+      });
   }
 
   sendResetLink(reg_email: any) {

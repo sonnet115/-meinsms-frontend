@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public translate: TranslateService) {
-    translate.addLangs(['us', 'fr']);
+    translate.addLangs(['us', 'de']);
     translate.setDefaultLang(localStorage.getItem('selected_lang'));
   }
 

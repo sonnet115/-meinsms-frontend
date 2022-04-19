@@ -10,7 +10,6 @@ import {AuthenticationRoutes} from './authentication.routing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {AlertModule} from '../../shared/services/_alert';
-import {RegistrationRequestBody} from './_models/RegistrationRequestBody';
 import {TranslateCompiler, TranslateLoader, TranslateModule, TranslateParser} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {httpTranslateLoader} from '../../app.module';
@@ -42,8 +41,6 @@ import {DialogService} from '../../shared/services/_modal/dialog.service';
     PassResetComponent
   ],
   providers: [
-    RegistrationRequestBody,
-    DialogService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -27,6 +27,17 @@ export const Approutes: Routes = [
   },
   {
     path: '',
+    component: FullComponent,
+    children: [
+      {
+        path: 'manage-classes',
+        loadChildren:
+          () => import('./_modules/classes/classes.module').then(m => m.ClassesModule)
+      }
+    ]
+  },
+  {
+    path: '',
     component: BlankComponent,
     children: [
       {

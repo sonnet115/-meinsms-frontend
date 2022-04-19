@@ -5,3 +5,7 @@
 .bg-base-color2{
   background-color: #ef9c0a;
 }
+
+.text-base-color2{
+  color: #ef9c0a !important;
+}

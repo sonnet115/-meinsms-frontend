@@ -21,7 +21,6 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {NavigationComponent} from './shared/header-navigation/navigation.component';
 import {SidebarComponent} from './shared/sidebar/sidebar.component';
-import {BreadcrumbComponent} from './shared/breadcrumb/breadcrumb.component';
 
 import {Approutes} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -60,7 +59,6 @@ registerLocaleData(localeFr);
     FullComponent,
     BlankComponent,
     NavigationComponent,
-    BreadcrumbComponent,
     SidebarComponent,
     LandingPageComponent,
     DialogModalComponent
@@ -74,18 +72,15 @@ registerLocaleData(localeFr);
     NgbModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot(Approutes),
-    PerfectScrollbarModule,
     Ng2SearchPipeModule,
     NgMultiSelectDropDownModule.forRoot(),
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyBUb3jDWJQ28vDJhuQZxkC0NXr_zycm8D0'}),
-    DragDropModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: httpTranslateLoader,
         deps: [HttpClient],
       },
-      defaultLanguage: 'en'
+      defaultLanguage: 'us'
     }),
     MomentModule.forRoot({
       relativeTimeThresholdOptions: {
@@ -94,13 +89,14 @@ registerLocaleData(localeFr);
     }),
     NgxSpinnerModule,
     DataTablesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PerfectScrollbarModule
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'fr-FR'},
+    {provide: LOCALE_ID, useValue: 'de-DE'},
     Endpoints,
     ApiService,
-
+    DialogService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

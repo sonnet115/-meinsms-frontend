@@ -1,18 +1,15 @@
 {
-  "loading": "Loading ...",
-  "bad_request": "Bad Request. Please try again!",
+  "loading" : "Loading ...",
 
   "--------------Landing": "Page-----------------",
   "teacher": "Teacher",
   "parent": "Parent",
-
   "--------------Login": "Page-----------------",
   "welcome_login": "WELCOME BACK",
   "login": "Login",
   "no_account": "Don't have an account?",
   "forgot_password": "Forgot Password",
   "err_invalid_cred": "Credentials do not match. Try again!",
-
   "--------------Signup": "Page-----------------",
   "welcome_signup": "Sign Up & Get Started",
   "signup": "Signup",
@@ -35,21 +32,11 @@
   "req_phone": "Phone is Required",
   "req_pass": "Password is required",
   "req_con_pass": "Confirm Password is required",
-  "regis_unsuccessful": "Registration Failed. Try Again!",
-  "logged_successful": "Log In Successful",
-  "username_taken": "Username Already Taken",
 
   "--------------Dialog": "Modal-----------------",
   "message_type_info": "Information",
   "message_type_warning": "Warning",
   "message_type_error": "Error",
-
-  "--------------Classes": "Page-----------------",
-  "manage_classes": "Manage Classes",
-  "create_class": "Create Class",
-  "class_name": "Class Name",
-  "req_class_name": "Class Name is required",
-  "class_create_successful": "Class Created Successfully",
 
   "old_password": "Old Password",
   "business": "Business",
@@ -139,6 +126,7 @@
   "err_common": "Something went wrong. Try Again!",
   "succ_email_verified": "Your email is verified. Please login to continue",
   "err_email_verify_expired": "Verification Link is expired",
+
   "succ_signup_verification": "A verification link has been sent to your email",
   "err_email_exists": "Email is already in use",
   "err_role_not_found": "Role not found",

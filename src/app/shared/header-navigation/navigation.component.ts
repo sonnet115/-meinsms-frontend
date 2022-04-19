@@ -25,7 +25,7 @@ export class NavigationComponent implements OnInit {
     if (localStorage.getItem('selected_lang') != null) {
       this.selected_lang = localStorage.getItem('selected_lang');
     } else {
-      this.selected_lang = 'fr';
+      this.selected_lang = 'de';
     }
   }
 
