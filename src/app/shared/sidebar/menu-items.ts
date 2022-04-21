@@ -3,7 +3,7 @@ import {RouteInfo} from './sidebar.metadata';
 export const ROUTES: RouteInfo[] = [
 
   {
-    path: '/manage-classes',
+    path: '/classes/manage',
     title: 'manage_classes',
     icon: 'icon-Bell-2',
     class: '',
@@ -11,7 +11,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/manage-rc',
+    path: '/manage-rating/rc',
     title: 'manage_rc',
     icon: 'icon-Car-Wheel',
     class: '',

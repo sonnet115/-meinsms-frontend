@@ -30,9 +30,20 @@ export const Approutes: Routes = [
     component: FullComponent,
     children: [
       {
-        path: 'manage-classes',
+        path: 'classes',
         loadChildren:
           () => import('./_modules/classes/classes.module').then(m => m.ClassesModule)
+      }
+    ]
+  },
+  {
+    path: '',
+    component: FullComponent,
+    children: [
+      {
+        path: 'manage-rating',
+        loadChildren:
+          () => import('./_modules/ratings/ratings.module').then(m => m.RatingsModule)
       }
     ]
   },
@@ -46,8 +57,8 @@ export const Approutes: Routes = [
       }
     ]
   },
-  {
+  /*{
     path: '**',
     redirectTo: '/authentication/404'
-  }
+  }*/
 ];

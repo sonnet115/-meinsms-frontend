@@ -12,4 +12,10 @@ export class Endpoints {
   public get_class = this.baseUrl + '/api/classes/get';
   public update_class = this.baseUrl + '/api/classes/update';
   public delete_class = this.baseUrl + '/api/classes/delete';
+
+  // RCs
+  public create_rc = this.baseUrl + '/api/rating-category/create';
+  public get_rc = this.baseUrl + '/api/rating-category/get';
+  public update_rc = this.baseUrl + '/api/rating-category/update';
+  public delete_rc = this.baseUrl + '/api/rating-category/delete';
 }

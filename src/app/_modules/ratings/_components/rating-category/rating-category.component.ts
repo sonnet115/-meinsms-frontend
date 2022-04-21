@@ -1,29 +1,30 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {ApiService} from '../../../../shared/services/api.service';
 import {AlertService} from '../../../../shared/services/_alert';
 import {Router} from '@angular/router';
-import {ApiService} from '../../../../shared/services/api.service';
 import {TranslateService} from '@ngx-translate/core';
-import {environment} from '../../../../../environments/environment';
-import {Endpoints} from '../../../../shared/endpoints';
 import {DialogService} from '../../../../shared/services/_modal/dialog.service';
 import {LoggerService} from '../../../../shared/services/logger.service';
+import {Endpoints} from '../../../../shared/endpoints';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
-  selector: 'app-manage-classes',
-  templateUrl: './manage-classes.component.html',
-  styleUrls: ['./manage-classes.component.css']
+  selector: 'app-rating-category',
+  templateUrl: './rating-category.component.html',
+  styleUrls: ['./rating-category.component.css']
 })
-export class ManageClassesComponent implements OnInit {
+export class RatingCategoryComponent implements OnInit {
+
   closeResult = '';
-  classes: any;
-  classById: any;
-  className: any;
-  classId: any;
-  classData: FormGroup;
-  classDataUpdate: FormGroup;
+  dataList: any;
+  rcById: any;
+  rcName: any;
+  rcId: any;
+  createData: FormGroup;
+  updateData: FormGroup;
   submitted = false;
 
   constructor(private modalService: NgbModal,
@@ -50,8 +51,8 @@ export class ManageClassesComponent implements OnInit {
   }
 
   confirmDelete(content, className, classId) {
-    this.className = className;
-    this.classId = classId;
+    this.rcName = className;
+    this.rcId = classId;
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -72,27 +73,27 @@ export class ManageClassesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getClasses();
+    this.get();
 
-    this.classData = this.formBuilder.group({
+    this.createData = this.formBuilder.group({
       name: ['', [Validators.required]],
     });
 
-    this.classDataUpdate = this.formBuilder.group({
+    this.updateData = this.formBuilder.group({
       name: ['', [Validators.required]],
     });
   }
 
   get fields() {
-    return this.classData.controls;
+    return this.createData.controls;
   }
 
-  getClasses() {
+  get() {
     this.spinner.show();
-    this.apiService.get('', this.endpoints.get_class).subscribe((response: any) => {
+    this.apiService.get('', this.endpoints.get_rc).subscribe((response: any) => {
         this.spinner.hide();
-        console.log(response);
-        this.classes = response.data;
+        this.loggerService.log(response);
+        this.dataList = response.data;
       },
       error => {
         this.spinner.hide();
@@ -100,21 +101,23 @@ export class ManageClassesComponent implements OnInit {
     );
   }
 
-  createClass() {
+  create() {
     this.spinner.show();
     this.submitted = true;
 
-    if (this.classData.invalid) {
+    if (this.createData.invalid) {
       this.spinner.hide();
       return;
     }
 
-    this.apiService.post(this.classData.value, this.endpoints.create_class).subscribe((response: any) => {
+    this.apiService.post(this.createData.value, this.endpoints.create_rc).subscribe((response: any) => {
         this.spinner.hide();
         this.loggerService.log(response);
-        this.classes = response.data;
-        this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
-        this.classData.reset({name: ''});
+        this.dataList = response.data;
+        this.modalService.dismissAll();
+        setTimeout(() => {
+          this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
+        }, 100);
         this.submitted = false;
       },
       error => {
@@ -123,12 +126,12 @@ export class ManageClassesComponent implements OnInit {
     );
   }
 
-  getClassById(classId: number) {
+  getById(targetId: number) {
     this.spinner.show();
-    this.apiService.get(classId, this.endpoints.get_class).subscribe((response: any) => {
+    this.apiService.get(targetId, this.endpoints.get_rc).subscribe((response: any) => {
         this.spinner.hide();
-        this.classById = response.data;
-        console.log(response);
+        this.rcById = response.data;
+        this.loggerService.log(response);
       },
       error => {
         this.spinner.hide();
@@ -136,24 +139,23 @@ export class ManageClassesComponent implements OnInit {
     );
   }
 
-  updateClass(classId: string) {
+  update(targetId: string) {
     this.spinner.show();
     this.submitted = true;
 
-    if (this.classDataUpdate.invalid) {
+    if (this.updateData.invalid) {
       this.spinner.hide();
       return;
     }
 
-    this.apiService.put(this.classDataUpdate.value, this.endpoints.update_class, classId).subscribe((response: any) => {
+    this.apiService.put(this.updateData.value, this.endpoints.update_rc, targetId).subscribe((response: any) => {
         this.spinner.hide();
-        console.log(response);
-        this.classes = response.data;
+        this.loggerService.log(response);
+        this.dataList = response.data;
         this.modalService.dismissAll();
         setTimeout(() => {
           this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
-        }, 200);
-        this.classDataUpdate.reset({name: ''});
+        }, 100);
         this.submitted = false;
       },
       error => {
@@ -162,13 +164,13 @@ export class ManageClassesComponent implements OnInit {
     );
   }
 
-  deleteClass(quesId: string) {
+  delete(targetId: string) {
     this.spinner.show();
-    this.apiService.delete(quesId, this.endpoints.delete_class).subscribe((response: any) => {
+    this.apiService.delete(targetId, this.endpoints.delete_rc).subscribe((response: any) => {
         this.spinner.hide();
         this.loggerService.log(response);
         this.modalService.dismissAll();
-        this.classes = response.data;
+        this.dataList = response.data;
         setTimeout(() => {
           this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
         }, 200);
@@ -177,11 +179,5 @@ export class ManageClassesComponent implements OnInit {
         this.spinner.hide();
       }
     );
-  }
-
-  gotoDetails(id) {
-    localStorage.removeItem('class_id');
-    this.router.navigate(['classes/details/' + id]);
-    localStorage.setItem('class_id', id);
   }
 }

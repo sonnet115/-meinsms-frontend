@@ -11,9 +11,7 @@ import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/h
 import {RouterModule} from '@angular/router';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {AgmCoreModule} from '@agm/core';
 import {ToastrModule} from 'ngx-toastr';
-import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import {FullComponent} from './shared/layouts/full/full.component';
 import {BlankComponent} from './shared/layouts/blank/blank.component';
@@ -61,7 +59,7 @@ registerLocaleData(localeFr);
     NavigationComponent,
     SidebarComponent,
     LandingPageComponent,
-    DialogModalComponent
+    DialogModalComponent,
   ],
   imports: [
     CommonModule,

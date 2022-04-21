@@ -1,23 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RatingCategoryComponent } from './_components/rating-category/rating-category.component';
 import {RouterModule} from '@angular/router';
-import {ClassesRouting} from './classes.routing';
-import { ManageClassesComponent } from './_components/manage-classes/manage-classes.component';
+import {RatingsRouting} from './ratings.routing';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {httpTranslateLoader} from '../../app.module';
 import {HttpClient} from '@angular/common/http';
 import {AlertModule} from '../../shared/services/_alert';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgxSpinnerModule} from 'ngx-spinner';
-import { ClassDetailsComponent } from './_components/class-details/class-details.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { StudentsComponent } from './_components/students/students.component';
+import {DataTablesModule} from 'angular-datatables';
 
 @NgModule({
-  declarations: [ManageClassesComponent, ClassDetailsComponent, StudentsComponent],
+  declarations: [RatingCategoryComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(ClassesRouting),
+    RouterModule.forChild(RatingsRouting),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -28,7 +26,7 @@ import { StudentsComponent } from './_components/students/students.component';
     AlertModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    NgbModule,
+    DataTablesModule,
   ]
 })
-export class ClassesModule { }
+export class RatingsModule { }
