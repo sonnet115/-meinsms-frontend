@@ -1,18 +1,16 @@
 {
   "loading": "Loading ...",
   "bad_request": "Bad Request. Please try again!",
-
+  "delete_confirm": "Are you sure you want to delete",
   "--------------Landing": "Page-----------------",
   "teacher": "Teacher",
   "parent": "Parent",
-
   "--------------Login": "Page-----------------",
   "welcome_login": "WELCOME BACK",
   "login": "Login",
   "no_account": "Don't have an account?",
   "forgot_password": "Forgot Password",
   "err_invalid_cred": "Credentials do not match. Try again!",
-
   "--------------Signup": "Page-----------------",
   "welcome_signup": "Sign Up & Get Started",
   "signup": "Signup",
@@ -38,18 +36,27 @@
   "regis_unsuccessful": "Registration Failed. Try Again!",
   "logged_successful": "Log In Successful",
   "username_taken": "Username Already Taken",
-
   "--------------Dialog": "Modal-----------------",
   "message_type_info": "Information",
   "message_type_warning": "Warning",
   "message_type_error": "Error",
-
   "--------------Classes": "Page-----------------",
   "manage_classes": "Manage Classes",
   "create_class": "Create Class",
+  "update_class": "Update Class",
   "class_name": "Class Name",
   "req_class_name": "Class Name is required",
   "class_create_successful": "Class Created Successfully",
+  "class_create_failed": "Class Create Failed",
+  "class_updated_success": "Class Updated Successfully",
+  "class_updated_failed": "Class Update Failed",
+  "class_deleted_success": "Class Deleted Successfully",
+  "class_deleted_failed": "Class Deleted Failed",
+  "class_code": "Code",
+  "class": "Class",
+
+  "--------------Rating": "Page-----------------",
+  "manage_rc": "Manage Ratings",
 
   "old_password": "Old Password",
   "business": "Business",

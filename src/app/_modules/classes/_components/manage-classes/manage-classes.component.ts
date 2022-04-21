@@ -9,6 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../../../../../environments/environment';
 import {Endpoints} from '../../../../shared/endpoints';
 import {DialogService} from '../../../../shared/services/_modal/dialog.service';
+import {LoggerService} from '../../../../shared/services/logger.service';
 
 @Component({
   selector: 'app-manage-classes',
@@ -16,16 +17,14 @@ import {DialogService} from '../../../../shared/services/_modal/dialog.service';
   styleUrls: ['./manage-classes.component.css']
 })
 export class ManageClassesComponent implements OnInit {
-
   closeResult = '';
-  questionSets: any;
-  questionSetName: any;
-  questionSetId: any;
-  questionSetsById: any;
-  showMsg = false;
-  questionSetData: FormGroup;
+  classes: any;
+  classById: any;
+  className: any;
+  classId: any;
+  classData: FormGroup;
+  classDataUpdate: FormGroup;
   submitted = false;
-  questionSetDataUpdate: FormGroup;
 
   constructor(private modalService: NgbModal,
               private formBuilder: FormBuilder,
@@ -33,8 +32,9 @@ export class ManageClassesComponent implements OnInit {
               private apiService: ApiService,
               private alertService: AlertService,
               private router: Router,
-              public translate: TranslateService,
+              private translate: TranslateService,
               private dialogService: DialogService,
+              private loggerService: LoggerService,
               private endpoints: Endpoints) {
     translate.addLangs(['us', 'de']);
     translate.setDefaultLang(localStorage.getItem('selected_lang'));
@@ -49,9 +49,9 @@ export class ManageClassesComponent implements OnInit {
     });
   }
 
-  confirmDelete(content, questionSetName, questionSetId) {
-    this.questionSetName = questionSetName;
-    this.questionSetId = questionSetId;
+  confirmDelete(content, className, classId) {
+    this.className = className;
+    this.classId = classId;
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -72,30 +72,27 @@ export class ManageClassesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getQuestionSet();
-    this.questionSetsById = null;
+    this.getClasses();
 
-    this.questionSetData = this.formBuilder.group({
+    this.classData = this.formBuilder.group({
       name: ['', [Validators.required]],
     });
 
-    this.questionSetDataUpdate = this.formBuilder.group({
+    this.classDataUpdate = this.formBuilder.group({
       name: ['', [Validators.required]],
     });
-
-
   }
 
   get fields() {
-    return this.questionSetData.controls;
+    return this.classData.controls;
   }
 
-  getQuestionSet() {
+  getClasses() {
     this.spinner.show();
-    this.apiService.get('', '').subscribe((response: any) => {
+    this.apiService.get('', this.endpoints.get_class).subscribe((response: any) => {
         this.spinner.hide();
         console.log(response);
-        this.questionSets = response;
+        this.classes = response.data;
       },
       error => {
         this.spinner.hide();
@@ -103,21 +100,21 @@ export class ManageClassesComponent implements OnInit {
     );
   }
 
-
-  createQuestion() {
+  createClass() {
     this.spinner.show();
     this.submitted = true;
 
-    if (this.questionSetData.invalid) {
+    if (this.classData.invalid) {
       this.spinner.hide();
       return;
     }
 
-    this.apiService.post(this.questionSetData.value, this.endpoints.create_class).subscribe((response: any) => {
+    this.apiService.post(this.classData.value, this.endpoints.create_class).subscribe((response: any) => {
         this.spinner.hide();
-        console.log(response);
+        this.loggerService.log(response);
+        this.classes = response.data;
         this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
-        this.questionSetData.reset({name: ''});
+        this.classData.reset({name: ''});
         this.submitted = false;
       },
       error => {
@@ -126,13 +123,12 @@ export class ManageClassesComponent implements OnInit {
     );
   }
 
-  editQuestionSet(questionSetId: number, updateContent: TemplateRef<any>) {
+  getClassById(classId: number) {
     this.spinner.show();
-    this.apiService.get(questionSetId, '').subscribe((response: any) => {
+    this.apiService.get(classId, this.endpoints.get_class).subscribe((response: any) => {
         this.spinner.hide();
+        this.classById = response.data;
         console.log(response);
-        this.questionSetsById = response;
-
       },
       error => {
         this.spinner.hide();
@@ -140,21 +136,24 @@ export class ManageClassesComponent implements OnInit {
     );
   }
 
-  updateQuestionSet(quesId: string) {
+  updateClass(classId: string) {
     this.spinner.show();
     this.submitted = true;
 
-    if (this.questionSetDataUpdate.invalid) {
+    if (this.classDataUpdate.invalid) {
       this.spinner.hide();
       return;
     }
 
-    this.apiService.put(this.questionSetDataUpdate.value, quesId).subscribe((response: any) => {
+    this.apiService.put(this.classDataUpdate.value, this.endpoints.update_class, classId).subscribe((response: any) => {
         this.spinner.hide();
-        this.alertService.success(response.message, {autoClose: true});
         console.log(response);
-        this.getQuestionSet();
-        this.questionSetDataUpdate.reset({name: ''});
+        this.classes = response.data;
+        this.modalService.dismissAll();
+        setTimeout(() => {
+          this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
+        }, 200);
+        this.classDataUpdate.reset({name: ''});
         this.submitted = false;
       },
       error => {
@@ -163,16 +162,16 @@ export class ManageClassesComponent implements OnInit {
     );
   }
 
-  deleteQuestionSet(quesId: string) {
+  deleteClass(quesId: string) {
     this.spinner.show();
-    this.apiService.delete(quesId, '').subscribe((response: any) => {
+    this.apiService.delete(quesId, this.endpoints.delete_class).subscribe((response: any) => {
         this.spinner.hide();
-        console.log(response);
-        this.alertService.success('Question set deleted ');
-        this.getQuestionSet();
+        this.loggerService.log(response);
+        this.modalService.dismissAll();
+        this.classes = response.data;
         setTimeout(() => {
-          this.modalService.dismissAll();
-        }, 5000);
+          this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
+        }, 200);
       },
       error => {
         this.spinner.hide();

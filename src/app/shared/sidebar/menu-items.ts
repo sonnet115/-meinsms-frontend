@@ -11,11 +11,11 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/create-questions',
-    title: 'Create Question',
-    icon: 'icon-Files',
+    path: '/manage-rc',
+    title: 'manage_rc',
+    icon: 'icon-Car-Wheel',
     class: '',
     extralink: false,
     submenu: []
-  }
+  },
 ];

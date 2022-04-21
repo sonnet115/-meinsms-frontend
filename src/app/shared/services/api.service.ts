@@ -20,20 +20,20 @@ export class ApiService {
     );
   }
 
-  public put(body, url) {
-    return this.http.put(url, body).pipe(
+  public put(body, url, param) {
+    return this.http.put(url + '/' + param, body).pipe(
       catchError(this.handleError),
     );
   }
 
   public get(param, url) {
-    return this.http.get(url + param).pipe(
+    return this.http.get(url + '/' + param).pipe(
       catchError(this.handleError),
     );
   }
 
   public delete(param, url) {
-    return this.http.delete(url + param).pipe(
+    return this.http.delete(url + '/' + param).pipe(
       catchError(this.handleError),
     );
   }

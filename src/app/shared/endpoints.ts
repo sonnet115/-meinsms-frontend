@@ -9,4 +9,7 @@ export class Endpoints {
 
   // Classes
   public create_class = this.baseUrl + '/api/classes/create';
+  public get_class = this.baseUrl + '/api/classes/get';
+  public update_class = this.baseUrl + '/api/classes/update';
+  public delete_class = this.baseUrl + '/api/classes/delete';
 }
