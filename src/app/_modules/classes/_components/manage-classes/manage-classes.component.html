@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-sm-6 col-lg-3 col-md-4 m-t-20" *ngFor="let cls of classes">
     <div class="bg-info shadow-lg c_border_radius c_box_items card-body" (click)="gotoDetails(cls.id)"
-         style="padding:25px 10px 1px 10px !important;">
+         style="padding:25px 10px 1px 10px !important;cursor: pointer">
       <div class="row">
         <div class="col-12 text-center">
           <h3 class="font-weight-bold text-white"
@@ -36,7 +36,7 @@
 
 <!--Create Question Set Button-->
 <div class="row">
-  <div class="col-sm-3 m-t-20" (click)="open(create_question)" style="cursor: pointer">
+  <div class="col-sm-3 m-t-20" (click)="open(create_class)" style="cursor: pointer">
     <div class="bg-danger shadow c_border_radius c_box_items card-body">
       <div class="row">
         <div class="col-12 text-center">
@@ -50,7 +50,7 @@
 <!--Create Question Set Button-->
 
 <!--Create Question Set Modal-->
-<ng-template #create_question let-modal>
+<ng-template #create_class let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">{{'create_class' | translate}}</h4>
     <button class="btn btn-sm rounded btn-outline-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">X

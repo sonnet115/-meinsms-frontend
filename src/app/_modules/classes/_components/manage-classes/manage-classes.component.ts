@@ -73,6 +73,7 @@ export class ManageClassesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getClasses();
+    this.getStudentByClass();
 
     this.classData = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -155,6 +156,18 @@ export class ManageClassesComponent implements OnInit {
         }, 200);
         this.classDataUpdate.reset({name: ''});
         this.submitted = false;
+      },
+      error => {
+        this.spinner.hide();
+      }
+    );
+  }
+
+  getStudentByClass() {
+    this.spinner.show();
+    this.apiService.get(localStorage.getItem('class_id'), this.endpoints.get_students).subscribe((response: any) => {
+        this.spinner.hide();
+        console.log(response);
       },
       error => {
         this.spinner.hide();

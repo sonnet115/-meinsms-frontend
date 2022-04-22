@@ -71,6 +71,8 @@
   "rc_deleted_success": "Rating Category Deleted Successfully",
   "rc_deleted_failed": "Rating Category Deleted Failed",
   "rc": "Rating Category",
+
+
   "old_password": "Old Password",
   "business": "Business",
   "identity": "CIF/NIE",
@@ -137,7 +139,6 @@
   "signature_loader": "Sending Signature request. Please wait...",
   "edit": "Edit",
   "profile": "Profile",
-  "update": "Update",
   "processing": "Processing...",
   "purchase_history": "Purchase History",
   "purchase": "Purchase",

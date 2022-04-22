@@ -7,7 +7,7 @@ import {NgbTabChangeEvent} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./class-details.component.css']
 })
 export class ClassDetailsComponent implements OnInit {
-  currentJustify = 'center';
+  currentJustify = 'fill';
   currentOrientation = 'horizontal';
 
   constructor() {

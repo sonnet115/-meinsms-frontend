@@ -119,6 +119,7 @@ export class RatingCategoryComponent implements OnInit {
           this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
         }, 100);
         this.submitted = false;
+        this.createData.reset({name: ''});
       },
       error => {
         this.spinner.hide();
@@ -157,6 +158,7 @@ export class RatingCategoryComponent implements OnInit {
           this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
         }, 100);
         this.submitted = false;
+        this.updateData.reset({name: ''});
       },
       error => {
         this.spinner.hide();
