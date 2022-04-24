@@ -10,6 +10,7 @@ export class Endpoints {
   // Classes
   public create_class = this.baseUrl + '/api/classes/create';
   public get_class = this.baseUrl + '/api/classes/get';
+  public get_class_by_student = this.baseUrl + '/api/classes/get/student';
   public update_class = this.baseUrl + '/api/classes/update';
   public delete_class = this.baseUrl + '/api/classes/delete';
 
@@ -20,10 +21,11 @@ export class Endpoints {
   public delete_rc = this.baseUrl + '/api/rating-category/delete';
 
   // Students
-  public create_students = this.baseUrl + '/api/rating-category/create';
-  public get_students = this.baseUrl + '/api/students/get/classes';
-  public update_students = this.baseUrl + '/api/rating-category/update';
-  public delete_students = this.baseUrl + '/api/rating-category/delete';
+  public create_students = this.baseUrl + '/api/students/create';
+  public get_students_by_class = this.baseUrl + '/api/students/get/classes';
+  public get_students_by_parent = this.baseUrl + '/api/students/get/by/parent';
+  public update_students = this.baseUrl + '/api/students/update';
+  public delete_students = this.baseUrl + '/api/students/delete';
 
   // Rating
   public create_rating = this.baseUrl + '/api/rating/create';

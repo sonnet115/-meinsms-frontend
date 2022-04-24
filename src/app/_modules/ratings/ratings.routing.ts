@@ -6,7 +6,7 @@ export const RatingsRouting: Routes = [
     path: '',
     children: [
       {
-        path: 'rc',
+        path: 'manage',
         component: RatingCategoryComponent
       },
     ]

@@ -17,7 +17,7 @@ export const ClassesRouting: Routes = [
     path: '',
     children: [
       {
-        path: 'details/:id',
+        path: 'details',
         component: ClassDetailsComponent
       },
     ]

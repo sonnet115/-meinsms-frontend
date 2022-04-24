@@ -12,9 +12,10 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import { ClassDetailsComponent } from './_components/class-details/class-details.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { StudentsComponent } from './_components/students/students.component';
+import { ActivitiesComponent } from './_components/activities/activities.component';
 
 @NgModule({
-  declarations: [ManageClassesComponent, ClassDetailsComponent, StudentsComponent],
+  declarations: [ManageClassesComponent, ClassDetailsComponent, StudentsComponent, ActivitiesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(ClassesRouting),

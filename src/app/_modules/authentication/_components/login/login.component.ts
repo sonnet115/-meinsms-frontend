@@ -9,6 +9,7 @@ import {ApiService} from '../../../../shared/services/api.service';
 import {DialogService} from '../../../../shared/services/_modal/dialog.service';
 import {environment} from '../../../../../environments/environment';
 import {Endpoints} from '../../../../shared/endpoints';
+import {PARENT_ROUTES, TEACHER_ROUTES} from '../../../../shared/sidebar/menu-items';
 
 @Component({
   selector: 'app-login',
@@ -46,7 +47,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'classes/manage';
   }
 
   get fields() {
@@ -90,6 +90,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
         localStorage.setItem('user_id', data.id);
         localStorage.setItem('user_name', data.name);
         localStorage.setItem('user_username', data.username);
+        localStorage.setItem('user_roles', data.roles);
+        let defaultUrl = '';
+        if (localStorage.getItem('user_roles').includes('ROLE_TEACHER')) {
+          defaultUrl = 'classes/manage';
+        } else {
+          defaultUrl = 'child/manage';
+        }
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || defaultUrl;
         this.router.navigate([this.returnUrl]);
       },
       error => {

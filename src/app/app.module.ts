@@ -59,7 +59,7 @@ registerLocaleData(localeFr);
     NavigationComponent,
     SidebarComponent,
     LandingPageComponent,
-    DialogModalComponent,
+    DialogModalComponent
   ],
   imports: [
     CommonModule,

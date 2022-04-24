@@ -41,9 +41,21 @@ export const Approutes: Routes = [
     component: FullComponent,
     children: [
       {
-        path: 'manage-rating',
+        path: 'rating',
         loadChildren:
           () => import('./_modules/ratings/ratings.module').then(m => m.RatingsModule)
+      }
+    ]
+  },
+
+  {
+    path: '',
+    component: FullComponent,
+    children: [
+      {
+        path: 'child',
+        loadChildren:
+          () => import('./_modules/children/children.module').then(m => m.ChildrenModule)
       }
     ]
   },

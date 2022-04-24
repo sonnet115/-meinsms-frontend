@@ -1,5 +1,5 @@
 import {Component, AfterViewInit, OnInit} from '@angular/core';
-import {ROUTES} from './menu-items';
+import {PARENT_ROUTES, TEACHER_ROUTES} from './menu-items';
 import {RouteInfo} from './sidebar.metadata';
 import {Router, ActivatedRoute} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -46,6 +46,10 @@ export class SidebarComponent implements OnInit {
 
   // End open close
   ngOnInit() {
-    this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    if (localStorage.getItem('user_roles').includes('ROLE_TEACHER')) {
+      this.sidebarnavItems = TEACHER_ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    } else {
+      this.sidebarnavItems = PARENT_ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    }
   }
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbModal, NgbTabChangeEvent} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder} from '@angular/forms';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {ApiService} from '../../../../shared/services/api.service';
@@ -11,13 +11,11 @@ import {LoggerService} from '../../../../shared/services/logger.service';
 import {Endpoints} from '../../../../shared/endpoints';
 
 @Component({
-  selector: 'app-class-details',
-  templateUrl: './class-details.component.html',
-  styleUrls: ['./class-details.component.css']
+  selector: 'app-child-classes',
+  templateUrl: './child-classes.component.html',
+  styleUrls: ['./child-classes.component.css']
 })
-export class ClassDetailsComponent implements OnInit {
-  currentJustify = 'fill';
-  currentOrientation = 'horizontal';
+export class ChildClassesComponent implements OnInit {
   classes: any;
 
   constructor(private modalService: NgbModal,
@@ -30,15 +28,25 @@ export class ClassDetailsComponent implements OnInit {
               private dialogService: DialogService,
               private loggerService: LoggerService,
               private endpoints: Endpoints) {
+    translate.addLangs(['us', 'de']);
+    translate.setDefaultLang(localStorage.getItem('selected_lang'));
   }
 
   ngOnInit(): void {
+    this.getClasses();
   }
 
-
-  public beforeChange($event: NgbTabChangeEvent) {
-    if ($event.nextId === 'tab-preventchange2') {
-      $event.preventDefault();
-    }
+  getClasses() {
+    this.spinner.show();
+    this.apiService.get(localStorage.getItem('child_id'), this.endpoints.get_class_by_student).subscribe((response: any) => {
+        this.spinner.hide();
+        console.log(response);
+        this.classes = response.data;
+      },
+      error => {
+        this.spinner.hide();
+      }
+    );
   }
+
 }

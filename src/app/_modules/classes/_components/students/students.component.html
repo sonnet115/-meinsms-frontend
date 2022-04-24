@@ -1,12 +1,20 @@
 <ngx-spinner fullScreen="false">
   <p style="font-size: 20px; color: white">{{'processing' | translate}}</p>
 </ngx-spinner>
-
-<div class="row" style="margin-top: 4rem">
+<div class="row"  style="margin-top: 2rem">
+  <div class="col-sm-3">
+    <select class="form-control" #class_id (change)="gotoDetails(class_id.value)">
+      <option *ngFor="let cls of classes" value="{{cls.id}}">{{cls.className}}</option>
+    </select>
+  </div>
+</div>
+<br>
+<div class="row" style="margin-top: 2rem">
   <div class="col-sm-3 col-md-4 col-lg-3" *ngFor="let student of studentList">
     <div class="card" style="width: 18rem;border:0;margin-top: -3rem">
-      <img *ngIf="student.avatar == null" src="{{getRandomAvatar(student.gender)}}" class="card-img-top" alt="...">
-      <img *ngIf="student.avatar != null" src="{{student.avatar}}" class="card-img-top" alt="...">
+      <img *ngIf="student.avatar == null" src="assets/images/no_image_profile.png" class="card-img-top" alt="...">
+      <img *ngIf="student.avatar != null" src="{{'data:image/jpg;base64,' + student.avatar}}" class="card-img-top"
+           alt="...">
       <div class="card-body">
         <h5 class="card-title">{{student.name}}</h5>
         <button class="rating_btn btn"
