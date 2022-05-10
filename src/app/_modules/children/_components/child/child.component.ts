@@ -24,6 +24,7 @@ export class ChildComponent implements OnInit {
   rcId: any;
   createData: FormGroup;
   updateData: FormGroup;
+  addToClassData: FormGroup;
   submitted = false;
   fileName: any;
   base64textString: any;
@@ -80,6 +81,11 @@ export class ChildComponent implements OnInit {
       name: ['', [Validators.required]],
       gender: ['male', [Validators.required]],
       avatar: ['', [Validators.required]],
+    });
+
+    this.addToClassData = this.formBuilder.group({
+      studentId: ['0', [Validators.required]],
+      classCode: ['', [Validators.required]],
     });
 
     this.updateData = this.formBuilder.group({
@@ -148,6 +154,46 @@ export class ChildComponent implements OnInit {
         this.createData.reset({name: ''});
       },
       error => {
+        this.spinner.hide();
+      }
+    );
+  }
+
+  addToClass() {
+    this.spinner.show();
+    this.submitted = true;
+
+    if (this.addToClassData.value['classCode'] === '') {
+      this.spinner.hide();
+      this.dialogService.open('req_classCode', environment.error_message, 'danger', environment.error);
+      return;
+    }
+
+    if (this.addToClassData.value['studentId'] === '0') {
+      this.spinner.hide();
+      this.dialogService.open('select_child', environment.error_message, 'danger', environment.error);
+      return;
+    }
+
+    this.loggerService.log(this.addToClassData.value);
+
+    this.apiService.post(this.addToClassData.value, this.endpoints.add_student_to_class).subscribe((response: any) => {
+        this.spinner.hide();
+        this.loggerService.log(response);
+        this.modalService.dismissAll();
+
+        setTimeout(() => {
+          if (response.status) {
+            this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
+          } else {
+            this.dialogService.open(response.message, environment.error_message, 'danger', environment.error);
+          }
+        }, 100);
+        this.submitted = false;
+        this.addToClassData.reset({classCode: '', studentId: '0'});
+      },
+      error => {
+        this.loggerService.log(error);
         this.spinner.hide();
       }
     );

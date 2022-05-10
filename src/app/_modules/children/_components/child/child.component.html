@@ -2,9 +2,12 @@
   <p style="font-size: 20px; color: white">{{'processing' | translate}}</p>
 </ngx-spinner>
 <!--Create Students Button-->
-<div class="row text-right">
-  <div class="col-sm-12" (click)="open(create_modal)" style="cursor: pointer;">
-    <button class="btn btn-danger btn-rounded shadow">{{'create_child' | translate}}</button>
+<div class="row">
+  <div class="col-sm-12 text-left" style="cursor: pointer;">
+    <button class="btn btn-success btn-rounded shadow" (click)="open(create_modal)"
+            style="float: right; margin-left: 20px">{{'create_child' | translate}}</button>
+    <button class="btn btn-danger btn-rounded shadow" (click)="open(add_to_modal)"
+            style="float: right">{{'add_child_to_class' | translate}}</button>
   </div>
 </div>
 <!--Create Students Button-->
@@ -12,7 +15,7 @@
 <div class="row" style="margin-top: 4rem ">
   <div class="col-sm-2 col-md-4 col-lg-3 rounded" style="cursor: pointer" *ngFor="let student of dataList"
        (click)="gotoDetails(student.id)">
-    <div class="card shadow" style="width: 18rem;border:0;margin-top: -3rem;max-width: 220px;height: 250px">
+    <div class="card shadow" style="width: 18rem;border:0;margin-top: -3rem;max-width: 220px;height: 250px;border-radius: 20px">
       <img *ngIf="student.avatar == null" style="max-width: 60%" src="assets/images/no_image_profile.png"
            class="card-img-top" alt="...">
       <img *ngIf="student.avatar != null" src="{{'data:image/jpg;base64,' + student.avatar}}" class="card-img-top"
@@ -67,6 +70,37 @@
   </div>
 </ng-template>
 <!--Create Students Modal-->
+
+<!--Add Students Modal-->
+<ng-template #add_to_modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{'add_child_to_class' | translate}}</h4>
+    <button class="btn btn-sm rounded btn-outline-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">X
+    </button>
+  </div>
+  <div class="modal-body" style="padding: 6px 13px">
+    <form class="form-horizontal m-t-20" [formGroup]="addToClassData" (ngSubmit)="addToClass()">
+      <div>
+        <div class="form-group">
+          <select class="form-control" formControlName="studentId" name="studentId" required>
+            <option value="0" selected disabled>{{'select_child' | translate}}</option>
+            <option *ngFor="let child of dataList" value="{{child.id}}">{{child.name}}</option>
+          </select>
+        </div>
+        <br>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="{{'class' | translate}} {{'code' | translate}}"
+                 formControlName="classCode" name="classCode">
+        </div>
+      </div>
+
+      <div class="modal-footer" style="padding: 8px">
+        <button type="submit" class="btn btn-warning">{{'add_child_to_class' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!--Add Students Modal-->
 
 <!--Update Students Modal-->
 <ng-template #update_modal let-modal>

@@ -11,12 +11,13 @@ import {LoggerService} from '../../../../shared/services/logger.service';
 import {Endpoints} from '../../../../shared/endpoints';
 
 @Component({
-  selector: 'app-child-classes',
-  templateUrl: './child-classes.component.html',
-  styleUrls: ['./child-classes.component.css']
+  selector: 'app-child-details',
+  templateUrl: './child-details.component.html',
+  styleUrls: ['./child-details.component.css']
 })
-export class ChildClassesComponent implements OnInit {
-  classes: any;
+export class ChildDetailsComponent implements OnInit {
+  currentJustify = 'fill';
+  currentOrientation = 'horizontal';
 
   constructor(private modalService: NgbModal,
               private formBuilder: FormBuilder,
@@ -31,28 +32,7 @@ export class ChildClassesComponent implements OnInit {
     translate.addLangs(['us', 'de']);
     translate.setDefaultLang(localStorage.getItem('selected_lang'));
   }
-
   ngOnInit(): void {
-    this.getClasses();
-  }
-
-  gotoDetails(id) {
-    localStorage.removeItem('class_id');
-    this.router.navigate(['child/classes/details']);
-    localStorage.setItem('class_id', id);
-  }
-
-  getClasses() {
-    this.spinner.show();
-    this.apiService.get(localStorage.getItem('child_id'), this.endpoints.get_class_by_student).subscribe((response: any) => {
-        this.spinner.hide();
-        console.log(response);
-        this.classes = response.data;
-      },
-      error => {
-        this.spinner.hide();
-      }
-    );
   }
 
 }

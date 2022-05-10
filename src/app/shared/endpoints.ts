@@ -24,6 +24,7 @@ export class Endpoints {
   public create_students = this.baseUrl + '/api/students/create';
   public get_students_by_class = this.baseUrl + '/api/students/get/classes';
   public get_students_by_parent = this.baseUrl + '/api/students/get/by/parent';
+  public add_student_to_class = this.baseUrl + '/api/students/add-to-class';
   public update_students = this.baseUrl + '/api/students/update';
   public delete_students = this.baseUrl + '/api/students/delete';
 

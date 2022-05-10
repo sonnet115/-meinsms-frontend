@@ -87,7 +87,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
         this.spinner.hide();
         this.loggerService.log('response', response);
 
-        if (!response.satus) {
+        if (!response.status) {
           this.dialogService.open(response.message, environment.error_message, 'danger', environment.error);
           return;
         }

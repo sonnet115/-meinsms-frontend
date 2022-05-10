@@ -39,22 +39,5 @@ export const PARENT_ROUTES: RouteInfo[] = [
     class: '',
     extralink: false,
     submenu: []
-  },
-  {
-    path: '/rating/manage',
-    title: 'manage_rc',
-    icon: 'icon-Car-Wheel',
-    class: '',
-    extralink: false,
-    submenu: []
-  },
-
-  {
-    path: '/classes/details',
-    title: 'class_details',
-    icon: 'icon-User',
-    class: '',
-    extralink: false,
-    submenu: []
-  },
+  }
 ];

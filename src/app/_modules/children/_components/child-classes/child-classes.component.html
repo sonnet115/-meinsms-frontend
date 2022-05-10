@@ -2,9 +2,10 @@
   <p style="font-size: 20px; color: white">{{'processing' | translate}}</p>
 </ngx-spinner>
 
+
 <div class="row">
   <div class="col-sm-6 col-lg-3 col-md-4 m-t-20" *ngFor="let cls of classes">
-    <div class="bg-info shadow-lg c_border_radius c_box_items card-body"
+    <div class="bg-info shadow-lg c_border_radius c_box_items card-body" st (click)="gotoDetails(cls.id)"
          style="padding:25px 10px 1px 10px !important;cursor: pointer">
       <div class="row">
         <div class="col-12 text-center">
