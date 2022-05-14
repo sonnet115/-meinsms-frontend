@@ -1,27 +1,47 @@
 <ngx-spinner fullScreen="false">
   <p style="font-size: 20px; color: white">{{'processing' | translate}}</p>
 </ngx-spinner>
-<div class="row"  style="margin-top: 2rem">
+<div class="row" style="margin-top: 2rem">
   <div class="col-sm-3">
     <select class="form-control" #class_id (change)="gotoDetails(class_id.value)">
-      <option *ngFor="let cls of classes" value="{{cls.id}}">{{cls.className}}</option>
+      <option *ngFor="let cls of classes" value="{{cls.id}}" [selected]="classId==cls.id">{{cls.className}}</option>
     </select>
+  </div>
+
+  <div class="col-sm-2">
+    <button class="btn btn-outline-danger btn-rounded"
+            (click)="getSickChild()">{{'show_all_sick_children' | translate}}</button>
+  </div>
+  <div class="col-sm-2 ml-2">
+    <button class="btn btn-outline-success btn-rounded"
+            (click)="getStudentByClass()">{{'show_all_students' | translate}}</button>
   </div>
 </div>
 <br>
 <div class="row" style="margin-top: 2rem">
-  <div class="col-sm-3 col-md-4 col-lg-3" *ngFor="let student of studentList">
-    <div class="card" style="width: 18rem;border:0;margin-top: -3rem">
-      <img *ngIf="student.avatar == null" src="assets/images/no_image_profile.png" class="card-img-top" alt="...">
-      <img *ngIf="student.avatar != null" src="{{'data:image/jpg;base64,' + student.avatar}}" class="card-img-top"
-           alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{student.name}}</h5>
-        <button class="rating_btn btn"
-                (click)="setStudentId(student.id);getStudentRatings(student.id, rating_modal)">Ratings
-        </button>
+  <ng-container *ngIf="studentList">
+    <div class="col-sm-3 col-md-4 col-lg-3" *ngFor="let student of studentList">
+      <div class="card" style="width: 18rem;border:0;margin-top: -3rem">
+      <span *ngIf="student.sick" class="badge badge-pill bg-danger text-white font-weight-bold"
+            style="position: absolute;top: 20px;right: 65px;margin: 0 auto;font-size: 13px">
+        {{'im_sick' | translate}}
+      </span>
+        <img *ngIf="student.avatar == null" src="assets/images/no_image_profile.png" class="card-img-top" alt="...">
+        <img *ngIf="student.avatar != null" src="{{'data:image/jpg;base64,' + student.avatar}}" class="card-img-top"
+             alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{student.name}}</h5>
+          <button class="rating_btn btn"
+                  (click)="setStudentId(student.id);getStudentRatings(student.id, rating_modal)">Ratings
+          </button>
+        </div>
       </div>
     </div>
+  </ng-container>
+  <div *ngIf="!studentList" style="margin: 0 auto">
+    <hr>
+    <h4 class="text-muted">{{'no_student_sick' | translate}}</h4>
+    <hr>
   </div>
 </div>
 

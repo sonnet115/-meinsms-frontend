@@ -13,15 +13,24 @@
 <!--Create Students Button-->
 
 <div class="row" style="margin-top: 4rem ">
-  <div class="col-sm-2 col-md-4 col-lg-3 rounded" style="cursor: pointer" *ngFor="let student of dataList"
-       (click)="gotoDetails(student.id)">
-    <div class="card shadow" style="width: 18rem;border:0;margin-top: -3rem;max-width: 220px;height: 250px;border-radius: 20px">
+  <div class="col-sm-2 col-md-4 col-lg-3" style="cursor: pointer" *ngFor="let student of dataList">
+    <div class="card shadow"
+         style="width: 18rem;border:0;margin-top: -3rem;max-width: 220px;height: 250px;border-radius: 10px">
       <img *ngIf="student.avatar == null" style="max-width: 60%" src="assets/images/no_image_profile.png"
            class="card-img-top" alt="...">
-      <img *ngIf="student.avatar != null" src="{{'data:image/jpg;base64,' + student.avatar}}" class="card-img-top"
+      <img *ngIf="student.avatar != null" style="max-width: 75% !important; margin: 0 auto"
+           src="{{'data:image/jpg;base64,' + student.avatar}}" class="card-img-top"
            alt="...">
       <div class="card-body text-center" style="padding: 0">
         <h5 class="card-title">{{student.name}}</h5>
+        <button *ngIf="!student.sick" (click)="mark(student.id, true)" class="btn btn-sm btn-outline-success mr-2"><i
+          class="ti-face-smile"></i></button>
+        <button *ngIf="student.sick" (click)="mark(student.id, false)" class="btn btn-sm btn-outline-danger mr-2"><i
+          class="ti-face-sad"></i></button>
+        <!--<button class="btn btn-xs btn-outline-primary mr-2"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-xs btn-outline-danger mr-2"><i class="fa fa-trash-alt"></i></button>-->
+        <button class="btn btn-sm btn-outline-info mr-2" (click)="gotoDetails(student.id)"><i class="fa fa-eye"></i>
+        </button>
       </div>
     </div>
   </div>

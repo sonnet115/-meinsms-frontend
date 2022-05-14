@@ -254,4 +254,21 @@ export class ChildComponent implements OnInit {
       }
     );
   }
+
+  mark(studentId, sick: boolean) {
+    this.spinner.show();
+    this.apiService.put('', this.endpoints.mark_sick, studentId + '/' + sick).subscribe((response: any) => {
+        this.spinner.hide();
+        this.loggerService.log(response);
+        this.dataList = response.data;
+        this.modalService.dismissAll();
+        setTimeout(() => {
+          this.dialogService.open(response.message, environment.info_message, 'success', environment.info);
+        }, 100);
+      },
+      error => {
+        this.spinner.hide();
+      }
+    );
+  }
 }

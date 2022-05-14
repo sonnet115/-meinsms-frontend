@@ -18,6 +18,7 @@
   "login": "Login",
   "no_account": "Don't have an account?",
   "forgot_password": "Forgot Password",
+
   "err_invalid_cred": "Credentials do not match. Try again!",
   "--------------Signup": "Page-----------------",
   "welcome_signup": "Sign Up & Get Started",

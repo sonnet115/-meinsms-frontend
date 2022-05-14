@@ -27,6 +27,8 @@ export class Endpoints {
   public add_student_to_class = this.baseUrl + '/api/students/add-to-class';
   public update_students = this.baseUrl + '/api/students/update';
   public delete_students = this.baseUrl + '/api/students/delete';
+  public mark_sick = this.baseUrl + '/api/students/mark/sick';
+  public get_sick = this.baseUrl + '/api/students/get/sick';
 
   // Rating
   public create_rating = this.baseUrl + '/api/rating/create';
