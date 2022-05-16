@@ -41,6 +41,17 @@ export const Approutes: Routes = [
     component: FullComponent,
     children: [
       {
+        path: 'appointment',
+        loadChildren:
+          () => import('./_modules/appointment/appointment.module').then(m => m.AppointmentModule)
+      }
+    ]
+  },
+  {
+    path: '',
+    component: FullComponent,
+    children: [
+      {
         path: 'rating',
         loadChildren:
           () => import('./_modules/ratings/ratings.module').then(m => m.RatingsModule)

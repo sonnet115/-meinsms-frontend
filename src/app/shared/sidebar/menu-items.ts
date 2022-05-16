@@ -27,6 +27,14 @@ export const TEACHER_ROUTES: RouteInfo[] = [
     extralink: false,
     submenu: []
   },
+  {
+    path: '/appointment/manage',
+    title: 'manage_appointment',
+    icon: 'icon-Time-Backup',
+    class: '',
+    extralink: false,
+    submenu: []
+  }
 ];
 
 
@@ -36,6 +44,15 @@ export const PARENT_ROUTES: RouteInfo[] = [
     path: '/child/manage',
     title: 'manage_child',
     icon: 'icon-User',
+    class: '',
+    extralink: false,
+    submenu: []
+  },
+
+  {
+    path: '/appointment/manage',
+    title: 'manage_appointment',
+    icon: 'icon-Time-Backup',
     class: '',
     extralink: false,
     submenu: []

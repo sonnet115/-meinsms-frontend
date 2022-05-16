@@ -32,6 +32,13 @@ export class ApiService {
     );
   }
 
+
+  public getQuery(url) {
+    return this.http.get(url).pipe(
+      catchError(this.handleError),
+    );
+  }
+
   public delete(param, url) {
     return this.http.delete(url + '/' + param).pipe(
       catchError(this.handleError),

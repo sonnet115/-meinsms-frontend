@@ -11,6 +11,7 @@ export class Endpoints {
   public create_class = this.baseUrl + '/api/classes/create';
   public get_class = this.baseUrl + '/api/classes/get';
   public get_class_by_student = this.baseUrl + '/api/classes/get/student';
+  public get_teacher_by_class = this.baseUrl + '/api/classes/get/teacher';
   public update_class = this.baseUrl + '/api/classes/update';
   public delete_class = this.baseUrl + '/api/classes/delete';
 
@@ -33,4 +34,9 @@ export class Endpoints {
   // Rating
   public create_rating = this.baseUrl + '/api/rating/create';
   public get_rating = this.baseUrl + '/api/rating/get';
+
+  // Appointment
+  public create_appointment = this.baseUrl + '/api/appointments/create';
+  public update_appointment = this.baseUrl + '/api/appointments/update';
+  public get_appointment_by_user = this.baseUrl + '/api/appointments/get-by/user';
 }
