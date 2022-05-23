@@ -7,7 +7,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {httpTranslateLoader} from '../../app.module';
 import {HttpClient} from '@angular/common/http';
 import {AlertModule} from '../../shared/services/_alert';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { ClassDetailsComponent } from './_components/class-details/class-details.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -16,20 +16,21 @@ import { ActivitiesComponent } from './_components/activities/activities.compone
 
 @NgModule({
   declarations: [ManageClassesComponent, ClassDetailsComponent, StudentsComponent, ActivitiesComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(ClassesRouting),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-    AlertModule,
-    ReactiveFormsModule,
-    NgxSpinnerModule,
-    NgbModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(ClassesRouting),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
+        AlertModule,
+        ReactiveFormsModule,
+        NgxSpinnerModule,
+        NgbModule,
+        FormsModule,
+    ]
 })
 export class ClassesModule { }

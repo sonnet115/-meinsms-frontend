@@ -39,4 +39,8 @@ export class Endpoints {
   public create_appointment = this.baseUrl + '/api/appointments/create';
   public update_appointment = this.baseUrl + '/api/appointments/update';
   public get_appointment_by_user = this.baseUrl + '/api/appointments/get-by/user';
+
+  // Activity
+  public create_activity = this.baseUrl + '/api/activity/create';
+  public get_activity = this.baseUrl + '/api/activity/get-by/class';
 }
