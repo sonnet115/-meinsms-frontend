@@ -35,7 +35,7 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <ul class="timeline timeline-left">
+        <ul class="timeline timeline-left" *ngIf="appointments.length > 0">
           <li class="timeline-inverted timeline-item" *ngFor="let app of appointments">
             <div class="timeline-badge success">
               <span class="font-12">{{app.startTime | date: 'HH:mm'}} </span>
@@ -76,6 +76,7 @@
             </div>
           </li>
         </ul>
+        <
       </div>
     </div>
   </div>

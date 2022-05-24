@@ -10,6 +10,12 @@
   "female": "weiblich",
   "gender": "Geschlecht",
   "rating": "Bewertung",
+  "search": "Suche",
+  "title": "Titel",
+  "pending": "Ausstehende Genehmigung",
+  "accepted": "AKZEPTIERT",
+  "cancelled": "STORNIERT",
+  "student": "Schüler/in",
   "--------------Landing": "Seite-----------------",
   "teacher": "Lehrer",
   "parent": "Eltern",
@@ -113,9 +119,17 @@
   "manage_appointment": "Termin verwalten",
   "appointment": "Termin",
   "request_appointment": "Termin anfordern",
-  "no_teacher_found_for_class": "Kein Lehrer ist für die Klasse gefunden"
+  "no_teacher_found_for_class": "Kein Lehrer ist für die Klasse gefunden",
   "invalid_class_id": "Ungültige Klasse ID",
   "end_time": "Endzeit",
   "start_time": "Start zeit",
-  "date": "Datum"
+  "date": "Datum",
+  "--------------Activity": "Page-----------------",
+  "activity": "Aktivität",
+  "type": "Art",
+  "description": "Beschreibung",
+  "image": "Bild",
+  "submit": "Einreichen",
+  "activity_create_successful": "Aktivität ist erfolgreich erstellt ",
+  "activity_create_failed": "Erstellen von Aktivität ist fehlgeschlagen"
 }

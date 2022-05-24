@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'app';
 
   constructor(public translate: TranslateService) {
-    translate.addLangs(['us', 'fr']);
+    translate.addLangs(['us', 'de']);
     translate.setDefaultLang('us');
 
     if (localStorage.getItem('selected_lang') == null) {

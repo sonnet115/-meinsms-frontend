@@ -91,7 +91,7 @@ registerLocaleData(localeFr);
     PerfectScrollbarModule
   ],
   providers: [
-    //{provide: LOCALE_ID, useValue: 'de-DE'},
+    // {provide: LOCALE_ID, useValue: 'de-DE'},
     Endpoints,
     ApiService,
     DialogService,

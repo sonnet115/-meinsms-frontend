@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalDismissReasons, NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dialog-modal',
@@ -13,8 +14,11 @@ export class DialogModalComponent {
   @Input() messageType;
   @Input() iconClass;
 
-  constructor(private activeModal: NgbActiveModal) {
+  constructor(private activeModal: NgbActiveModal,
+              private translate: TranslateService) {
     activeModal.close();
+    translate.addLangs(['us', 'de']);
+    translate.setDefaultLang(localStorage.getItem('selected_lang'));
   }
 
   close() {
