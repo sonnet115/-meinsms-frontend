@@ -190,24 +190,28 @@ export class StudentsComponent implements OnInit, AfterViewInit {
   }
 
   disabledNeg(rcId) {
-    for (let i = 0; i < this.studentRatings.length; i++) {
-      console.log(this.studentRatings[i]);
-      // @ts-ignore
-      if (this.studentRatings[i].ratingCategory.id === rcId) {
+    if (this.studentRatings != null) {
+      for (let i = 0; i < this.studentRatings.length; i++) {
+        console.log(this.studentRatings[i]);
         // @ts-ignore
-        return this.studentRatings[i].negative === '1' ? 'disabled' : '';
+        if (this.studentRatings[i].ratingCategory.id === rcId) {
+          // @ts-ignore
+          return this.studentRatings[i].negative === '1' ? 'disabled' : '';
+        }
       }
     }
     return '';
   }
 
   disabledPos(rcId) {
-    for (let i = 0; i < this.studentRatings.length; i++) {
-      console.log(this.studentRatings[i]);
-      // @ts-ignore
-      if (this.studentRatings[i].ratingCategory.id === rcId) {
+    if (this.studentRatings != null) {
+      for (let i = 0; i < this.studentRatings.length; i++) {
+        console.log(this.studentRatings[i]);
         // @ts-ignore
-        return this.studentRatings[i].positive === '1' ? 'disabled' : '';
+        if (this.studentRatings[i].ratingCategory.id === rcId) {
+          // @ts-ignore
+          return this.studentRatings[i].positive === '1' ? 'disabled' : '';
+        }
       }
     }
     return '';

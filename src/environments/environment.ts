@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  base_url: 'http://localhost:8080',
+  base_url: 'http://3.120.194.131:8082',
+  // base_url: 'http://localhost:8080',
 
   // dialog modal icon
   warning: 'fa fa-exclamation-triangle',
